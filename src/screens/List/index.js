@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './index.css';
-import { getList } from '../../services/request';
+import { getList, updateItem } from '../../services/request';
 import { ListRender, Loader, Button, Modal } from '../../components'
 
 export const ListScreen = () => {
@@ -36,6 +36,18 @@ export const ListScreen = () => {
         setModalVisible(true);
     }
 
+    const onCheckItem = async (item) => {
+       const result = await updateItem(item._id, {
+            name: item.name,
+            quantity: Number(item.quantity),
+            checked: !item.checked,
+        });
+
+        if(!result.error){
+           await loadListItems();
+        }
+    };
+
     return <div className='list-screen-container'>
         <div className='list-screen-content-container'>
             <div className='list-screen-header'>
@@ -47,12 +59,16 @@ export const ListScreen = () => {
                 <h1 className='list-screen-header-title'>Lista Supermercado</h1>
              </div>
              <div className='list-screen-header-button-container'>
-                <Button onClick={onClickAddButton}>Adicionar</Button>
+                <Button onClick={onClickAddButton}>
+                    {
+                        window.innerWidth <= 420 ? '+'  : 'Adicionar'
+                    }
+                </Button>
              </div>
             </div>
             <div className='list-screen-list-container'>
                 {
-                    loading? <Loader/> : <ListRender onEdit={onEditItem} list={listData} />
+                    loading? <Loader/> : <ListRender onCheckItem={onCheckItem} onEdit={onEditItem} list={listData} />
                 }
             </div>
         </div>
