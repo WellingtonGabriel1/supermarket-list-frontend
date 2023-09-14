@@ -6,10 +6,17 @@ This is an application build using React.js, with the goal of make easier create
  <img height="500" src="https://github.com/WellingtonGabriel1/supermarket-list-frontend/blob/master/public/images/list.gif"/>
 </p>
 
+## Link to Production App:
+
+https://supermarket-list-frontend-delta.vercel.app/
+
 ## Technologies Used
 - React.js
 - CSS
 - Axios
+
+## Requirements to Run:
+- Node.js (https://nodejs.org/en/)
 
 ## Running Instructions
 1. Clone the project: 
